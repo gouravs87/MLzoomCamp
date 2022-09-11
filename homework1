@@ -1,0 +1,17 @@
+import pandas as pd
+import numpy as np
+
+np.__version__
+df=pd.read_csv("https://raw.githubusercontent.com/alexeygrigorev/mlbookcamp-code/master/chapter-02-car-price/data.csv")
+df
+df['Engine Cylinders'].median()
+df['Engine Cylinders'].value_counts()
+df['Engine Cylinders'].fillna(4.0, inplace=True)
+df['Engine Cylinders'].value_counts()
+df['Engine Cylinders'].median()
+X=df[df.Make=='Lotus'][["Engine HP", "Engine Cylinders"]].drop_duplicates().values
+XTX=(X.T).dot(X)
+XTX_inv=np.linalg.inv(XTX)
+y = np.array([1100, 800, 750, 850, 1300, 1000, 1000, 1300, 800])
+w= XTX_inv.dot(X.T).dot(y)
+w
